@@ -3,6 +3,8 @@
 
 A React application developed during my Full Stack Web Development training at **Kenzie Academy Brasil**, featuring user authentication, protected navigation, and technology management.
 
+**[Published front-end preview](https://kenziehub-eta-drab.vercel.app/)** — deployment recorded on Vercel. Its availability and the external authentication API have not been independently verified in this review.
+
 ## Overview
 
 KenzieHub is an educational web application designed to help users manage technologies associated with their profiles.
