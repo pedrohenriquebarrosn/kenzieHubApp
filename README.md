@@ -3,7 +3,7 @@
 
 A React application developed during my Full Stack Web Development training at **Kenzie Academy Brasil**, featuring user authentication, protected navigation, and technology management.
 
-**[Published front-end preview](https://kenziehub-eta-drab.vercel.app/)** — deployment recorded on Vercel. Its availability and the external authentication API have not been independently verified in this review.
+**[Hosted UI preview](https://kenziehub-eta-drab.vercel.app/)** — the page was opened in a manual check on 11 October 2026. Registration and sign-in did not work in that check. **This is not a verified functional demo.**
 
 ## Overview
 
@@ -51,7 +51,7 @@ The API configuration is located in `src/services/api.js` and currently referenc
 
 `https://kenziehub.herokuapp.com`
 
-**Important:** The current availability of this external service has not been verified. Registration, authentication, and technology management may require updating the API integration.
+**Current limitation (11 October 2026):** A manual browser check confirmed the front-end page loads but registration and sign-in fail. The external API endpoint is an unverified possible cause; no backend diagnosis or fix was performed. Authenticated technology-management flows could not be tested.
 
 ## Technical Highlights
 
