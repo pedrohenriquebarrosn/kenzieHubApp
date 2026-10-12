@@ -4,7 +4,7 @@ Educational React application originally developed during the Kenzie Academy Bra
 
 ## Live preview (under validation)
 
-**[Open KenzieHub preview](https://kenziehub-qfwq-l0njj0jow-pedrohenriquebarrosns-projects.vercel.app/)**. This preview is built from the recovery branch, **not** from `main`. The original production deployment remains unchanged.
+**[Open KenzieHub preview](https://kenziehub-qfwq-7sil0erwz-pedrohenriquebarrosns-projects.vercel.app/)**. This preview is built from the recovery branch, **not** from `main`. The original production deployment remains unchanged.
 
 - **Guest demo:** click `Acessar demonstração` to create/edit/delete sample technologies stored only in this browser.
 - **Real-account route:** registration/login through Supabase Auth, protected dashboard, and persisted technologies in PostgreSQL, isolated by RLS policies.
