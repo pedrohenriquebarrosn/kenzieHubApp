@@ -71,3 +71,24 @@ test('registration accepts contiguous 11-digit mobile number and sends normalize
   await expect.poll(() => sentContact).toBe('81999998888');
   await expect(page.getByRole('button', { name: 'Acessar demonstração' })).toBeVisible();
 });
+
+test('login password eye matches register eye in color, alignment and show/hide behavior', async ({ page }) => {
+  await page.goto('/');
+  const loginInput = page.locator('input[name="password"]');
+  const loginEye = page.locator('fieldset').filter({ has: loginInput }).getByRole('button');
+
+  await expect(loginEye).toHaveCSS('color', 'rgb(255, 255, 255)');
+  await expect(loginEye).toHaveCSS('top', '37px');
+  await loginEye.click();
+  await expect(loginInput).toHaveAttribute('type', 'text');
+  await loginEye.click();
+  await expect(loginInput).toHaveAttribute('type', 'password');
+
+  await page.goto('/register');
+  const registerInput = page.locator('input[name="password"]');
+  const registerEye = page.locator('fieldset').filter({ has: registerInput }).getByRole('button');
+  await expect(registerEye).toHaveCSS('color', 'rgb(255, 255, 255)');
+  await expect(registerEye).toHaveCSS('top', '37px');
+  await registerEye.click();
+  await expect(registerInput).toHaveAttribute('type', 'text');
+});
