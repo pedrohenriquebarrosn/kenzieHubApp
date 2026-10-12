@@ -6,7 +6,7 @@ import { UserContext } from "./UserContext";
 export const TechsContext = createContext({});
 
 export const TechsProvider = ({ children }) => {
-  const { techs, setTechs } = useContext(UserContext);
+  const { techs, setTechs, isDemo } = useContext(UserContext);
   const [createModal, setCreateModal] = useState(false);
   const [updateModal, setUpdateModal] = useState(null);
 
@@ -15,6 +15,11 @@ export const TechsProvider = ({ children }) => {
   });
 
   const techsCreate = async (formData) => {
+    if (isDemo) {
+      setTechs((current) => [...current, { ...formData, id: `demo-${Date.now()}` }]);
+      toast.success("Tecnologia adicionada à demonstração!");
+      return true;
+    }
     try {
       const response = await Api.post("/users/techs", formData, authorization());
       setTechs((current) => [...current, response.data]);
@@ -27,6 +32,11 @@ export const TechsProvider = ({ children }) => {
   };
 
   const techsRemove = async (techId) => {
+    if (isDemo) {
+      setTechs((current) => current.filter((tech) => tech.id !== techId));
+      toast.success("Tecnologia removida da demonstração!");
+      return true;
+    }
     try {
       await Api.delete(`/users/techs/${techId}`, authorization());
       setTechs((current) => current.filter((tech) => tech.id !== techId));
@@ -39,6 +49,13 @@ export const TechsProvider = ({ children }) => {
   };
 
   const techsUpdate = async (formData, techId) => {
+    if (isDemo) {
+      setTechs((current) => current.map((tech) =>
+        tech.id === techId ? { ...tech, ...formData } : tech
+      ));
+      toast.success("Tecnologia atualizada na demonstração!");
+      return true;
+    }
     try {
       const response = await Api.put(`/users/techs/${techId}`, formData, authorization());
       setTechs((current) => current.map((tech) =>
