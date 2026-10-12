@@ -41,6 +41,12 @@ export const StyledFormLogin = styled.form`
     padding-bottom: 40px;
   }
 
+  /* Igual ao cadastro: ícone de visibilidade branco e alinhado ao campo. */
+  fieldset button {
+    top: 37px;
+    color: #ffffff;
+  }
+
   label {
     font-style: normal;
     font-weight: 400;
