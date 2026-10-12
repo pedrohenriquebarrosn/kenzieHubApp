@@ -1,80 +1,43 @@
+# KenzieHub — React Technology Dashboard
 
-# KenzieHub — Technology Management Dashboard
+Educational React application originally developed during the Kenzie Academy Brasil Full Stack program, now under an isolated recovery branch to restore persistent, authenticated data.
 
-A React application developed during my Full Stack Web Development training at **Kenzie Academy Brasil**, featuring user authentication, protected navigation, and technology management.
+## Live preview (under validation)
 
-**[Existing hosted UI](https://kenziehub-eta-drab.vercel.app/)** — registration and sign-in failed in a manual check on 11 October 2026. This URL still serves an older version, **not the tested recovery-branch demonstration**.
+**[Open KenzieHub preview](https://kenziehub-qfwq-maq032d76-pedrohenriquebarrosns-projects.vercel.app/)**. This preview is built from the recovery branch, **not** from `main`. The original production deployment remains unchanged.
 
-**[Recovery PR](https://github.com/pedrohenriquebarrosn/kenzieHubApp/pull/1)** — this separate branch adds an explicitly labeled browser-only guest demonstration. Build and **2/2 Playwright browser tests passed** in Chromium (desktop flow and mobile viewport): [test evidence](https://github.com/pedrohenriquebarrosn/kenzieHubApp/actions/runs/38264677945). Real account creation and server authentication are **not yet restored**.
+- **Guest demo:** click `Acessar demonstração` to create/edit/delete sample technologies stored only in this browser.
+- **Real-account route:** registration/login through Supabase Auth, protected dashboard, and persisted technologies in PostgreSQL, isolated by RLS policies.
+- **Email limitation:** Supabase default SMTP only supports authorized organization-team email addresses. An external-user signup flow needs custom SMTP and configured authentication redirect URLs; delivery is **not verified**.
+- **Scope:** educational application, not a production-grade service. Do not submit passwords already used elsewhere.
 
-## Overview
+## Technology
 
-KenzieHub is an educational web application designed to help users manage technologies associated with their profiles.
+React 18 · JavaScript · Vite · React Router · React Hook Form · Yup · Styled Components · Supabase Auth · PostgreSQL · Row Level Security.
 
-The project demonstrates front-end development concepts, API integration, authentication flows, and component-based architecture.
-
-## Features
-
-- User registration and login interfaces.
-- Protected dashboard routes.
-- Technology management through an external API.
-- Form validation and user feedback.
-- Client-side navigation with React Router.
-- Notifications for user interactions.
-
-## Technologies
-
-- React 18
-- JavaScript
-- Vite
-- React Router
-- Axios
-- React Hook Form
-- Yup
-- Styled Components
-- React Toastify
-
-## Getting Started
-
-Clone the repository and install the dependencies:
+## Code
 
 ```bash
+git clone https://github.com/pedrohenriquebarrosn/kenzieHubApp.git
+cd kenzieHubApp
+git checkout fix/recover-auth-and-techs-20261012
 npm install
 npm run dev
 ```
 
-Open the local URL displayed by Vite.
+Public client configuration in `src/services/supabase.js` supports `VITE_SUPABASE_URL` and `VITE_SUPABASE_PUBLISHABLE_KEY`. Publishable keys are meant for browser use; **never** place service-role keys or database passwords in Vite variables.
 
-## API Integration
+## Data security
 
-The application communicates with an external KenzieHub API using Axios.
+Table `public.kenziehub_technologies` has RLS enabled with policies requiring `auth.uid() = user_id` for CRUD. Guest demonstration never writes to the server. Access to the table is not granted to the anonymous role.
 
-The API configuration is located in `src/services/api.js` and currently references:
+## Verification
 
-`https://kenziehub.herokuapp.com`
+- [Recovery pull request](https://github.com/pedrohenriquebarrosn/kenzieHubApp/pull/1) (draft).
+- [Passing browser and API-contract tests](https://github.com/pedrohenriquebarrosn/kenzieHubApp/actions/runs/38288172541) include guest operations and mocked hosted Auth/CRUD interactions through reload.
+- Vercel staging preview reached `READY`.
+- **Not yet verified:** real confirmation email receipt, live signup/login with distinct accounts, authenticated CRUD persistence and isolation in the hosted browser. API-mocked tests are **not** proof of those live checks.
 
-**Current limitation (12 October 2026):** This recovery branch fixes session-loading and form error handling, and enables local guest technology creation, editing, removal and persistence through browser storage. The old API availability is unverified; real registration, sign-in and backend data persistence have **not** been restored or independently tested. The Vercel site has not been updated to this branch.
+## Portfolio use
 
-To try the guest demo locally, check out `fix/recover-auth-and-techs-20261012`, run `npm install` then `npm run dev`, and choose **Acessar demonstração**. No real credentials are needed. The demo does not perform real authentication.
-
-See [recovery notes](docs/RECOVERY_2026-10-12.md) for dependencies, scope and remaining tests.
-
-## Technical Highlights
-
-- Reusable React components.
-- Client-side state management.
-- Protected routes for authenticated users.
-- HTTP requests and API integration with Axios.
-- Form handling and validation.
-- Conditional rendering and user notifications.
-
-## Project Scope
-
-This project was developed for educational purposes at Kenzie Academy Brasil.
-
-It demonstrates practical front-end development and authentication-related concepts but has not been independently validated as a production-ready application.
-
-## Connect
-
-- [LinkedIn](https://www.linkedin.com/in/pedro-henrique-barros-nascimento-2bb684251/)
-- [GitHub Profile](https://github.com/pedrohenriquebarrosn)
+The hosted URL is a **technical preview**, not a completed production release. Keep the recovery branch separate until an actual user can verify signup, login, refresh, technology CRUD, logout, and cross-account isolation.
