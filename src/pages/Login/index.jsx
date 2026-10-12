@@ -20,9 +20,8 @@ export const Login = () => {
     reset,
   } = useForm({ resolver: yupResolver(LoginSchema) });
 
-  const submit = (formData) => {
-    userLogin(formData);
-    reset();
+  const submit = async (formData) => {
+    if (await userLogin(formData)) reset();
   };
 
   return (
