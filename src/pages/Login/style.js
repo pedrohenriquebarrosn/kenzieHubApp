@@ -73,7 +73,8 @@ export const StyledFormLogin = styled.form`
     color: #f8f9fa;
   }
 
-  button {
+  /* Entrar: mesmo comportamento visual do botão de cadastro. */
+  > button {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -84,9 +85,11 @@ export const StyledFormLogin = styled.form`
     width: 100%;
     height: 48px;
 
-    background: #ff577f;
+    background: #59323f;
 
-    border: 1.2182px solid #ff577f;
+    border: 1.2182px solid #59323f;
+    cursor: pointer;
+    transition: background-color 160ms ease, border-color 160ms ease;
     border-radius: 4.06066px;
 
     font-style: normal;
@@ -95,6 +98,57 @@ export const StyledFormLogin = styled.form`
     line-height: 1.625rem;
 
     color: #ffffff;
+  }
+
+  > button:hover,
+  > button:focus-visible {
+    background: #ff577f;
+    border-color: #ff577f;
+  }
+
+  > button:focus-visible,
+  .demoEntry > button:focus-visible {
+    outline: 2px solid #f8f9fa;
+    outline-offset: 3px;
+  }
+
+  /* Guest demo belongs to the same dark login card and color system. */
+  .demoEntry {
+    padding: 22px 0 26px;
+    gap: 14px;
+    border-top: 1px solid #343b41;
+
+    p {
+      margin: 0;
+      color: #f8f9fa;
+      font-size: 0.875rem;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    p:last-child {
+      color: #adb5bd;
+      font-size: 0.75rem;
+    }
+
+    > button {
+      width: 100%;
+      height: 48px;
+      border: 1.2182px solid #59323f;
+      border-radius: 4px;
+      background: #59323f;
+      color: #ffffff;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 160ms ease, border-color 160ms ease;
+    }
+
+    > button:hover,
+    > button:focus-visible {
+      background: #ff577f;
+      border-color: #ff577f;
+    }
   }
 
   .divRegister {
