@@ -7,11 +7,16 @@ import { Input } from "../../components/Input";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { LoginSchema } from "./loginSchema";
 import { UserContext } from "../../providers/UserContext";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { InputPassword } from "../../components/InputPassword";
 
 export const Login = () => {
-  const { userLogin, startDemo } = useContext(UserContext);
+  const { userLogin, startDemo, user, loading } = useContext(UserContext);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!loading && user) navigate("/dashboard", { replace: true });
+  }, [loading, user, navigate]);
 
   const {
     handleSubmit,
