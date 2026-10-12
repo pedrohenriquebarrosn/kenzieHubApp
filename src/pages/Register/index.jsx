@@ -24,9 +24,8 @@ export const Register = () => {
     resolver: yupResolver(RegisterSchema),
   });
 
-  const submit = (formData) => {
-    userRegister(formData);
-    reset();
+  const submit = async (formData) => {
+    if (await userRegister(formData)) reset();
   };
 
   return (
