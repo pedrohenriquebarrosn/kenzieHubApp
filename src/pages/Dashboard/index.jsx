@@ -9,7 +9,7 @@ import { ModalCreateTechs } from "../../components/ModalCreateTechs";
 import { ModalUpdateTechs } from "../../components/ModalUpdateTechs";
 
 export const Dashboard = () => {
-  const { user, userLogout } = useContext(UserContext);
+  const { user, userLogout, isDemo } = useContext(UserContext);
 
   const { techs, createModal, setCreateModal, updateModal, setUpdateModal } =
     useContext(TechsContext);
@@ -23,6 +23,7 @@ export const Dashboard = () => {
         </nav>
       </StyledDashboardHeader>
       <StyledDashboardMain>
+        {isDemo && <p role="status">Demonstração local: não representa autenticação real nem dados sincronizados.</p>}
         <section className="sectionBio">
           <div>
             <h2>Olá, {user.name}</h2>
