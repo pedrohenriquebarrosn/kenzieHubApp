@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import { Api } from "../services/api";
 import { toast } from "react-toastify";
 import { UserContext } from "./UserContext";
@@ -7,76 +7,56 @@ export const TechsContext = createContext({});
 
 export const TechsProvider = ({ children }) => {
   const { techs, setTechs } = useContext(UserContext);
-
   const [createModal, setCreateModal] = useState(false);
   const [updateModal, setUpdateModal] = useState(null);
 
+  const authorization = () => ({
+    headers: { Authorization: `Bearer ${localStorage.getItem("@TOKEN")}` },
+  });
+
   const techsCreate = async (formData) => {
     try {
-      const token = localStorage.getItem("@TOKEN");
-      const response = await Api.post("/users/techs", formData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      setTechs([...techs, response.data]);
+      const response = await Api.post("/users/techs", formData, authorization());
+      setTechs((current) => [...current, response.data]);
       toast.success("Tecnologia criada com sucesso!");
-    } catch (error) {
-      console.log(error);
+      return true;
+    } catch {
+      toast.error("Não foi possível criar a tecnologia.");
+      return false;
     }
   };
 
   const techsRemove = async (techId) => {
     try {
-      const token = localStorage.getItem("@TOKEN");
-      const response = await Api.delete(`/users/techs/${techId}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const newTechs = techs.filter((tech) => tech.id !== techId);
-      setTechs(newTechs);
+      await Api.delete(`/users/techs/${techId}`, authorization());
+      setTechs((current) => current.filter((tech) => tech.id !== techId));
       toast.success("Tecnologia deletada com sucesso!");
-    } catch (error) {
-      console.log(error);
+      return true;
+    } catch {
+      toast.error("Não foi possível excluir a tecnologia.");
+      return false;
     }
   };
 
   const techsUpdate = async (formData, techId) => {
     try {
-      const token = localStorage.getItem("@TOKEN");
-      const response = await Api.put(`/users/techs/${techId}`, formData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const newTechs = techs.map((tech) => {
-        if (techId === tech.id) {
-          return { ...tech, ...formData };
-        } else {
-          return tech;
-        }
-      });
-      setTechs(newTechs);
+      const response = await Api.put(`/users/techs/${techId}`, formData, authorization());
+      setTechs((current) => current.map((tech) =>
+        tech.id === techId ? { ...tech, ...(response.data || formData) } : tech
+      ));
       toast.success("Tecnologia atualizada com sucesso!");
-    } catch (error) {
-      console.log(error);
+      return true;
+    } catch {
+      toast.error("Não foi possível atualizar a tecnologia.");
+      return false;
     }
   };
 
   return (
-    <TechsContext.Provider
-      value={{
-        techs,
-        techsCreate,
-        techsRemove,
-        createModal,
-        setCreateModal,
-        updateModal,
-        setUpdateModal,
-        techsUpdate,
-      }}
-    >
+    <TechsContext.Provider value={{
+      techs, techsCreate, techsRemove, createModal, setCreateModal,
+      updateModal, setUpdateModal, techsUpdate
+    }}>
       {children}
     </TechsContext.Provider>
   );
