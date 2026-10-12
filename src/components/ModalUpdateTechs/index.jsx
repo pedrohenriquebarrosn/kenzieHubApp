@@ -33,9 +33,10 @@ export const ModalUpdateTechs = () => {
   });
 
   const submit = async (formData) => {
-    await techsUpdate(formData, updateModal.id);
-    setUpdateModal(null);
-    reset();
+    if (await techsUpdate(formData, updateModal.id)) {
+      setUpdateModal(null);
+      reset();
+    }
   };
 
   return (
@@ -71,8 +72,7 @@ export const ModalUpdateTechs = () => {
             className={"excludeButton"}
             type={"button"}
             action={async () => {
-              await techsRemove(updateModal.id);
-              setUpdateModal(null);
+              if (await techsRemove(updateModal.id)) setUpdateModal(null);
             }}
           >
             Excluir
