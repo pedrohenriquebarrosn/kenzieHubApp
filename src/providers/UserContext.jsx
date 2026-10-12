@@ -56,7 +56,7 @@ export const UserProvider = ({ children }) => {
     try {
       const { email, password, confirmPassword, ...metadata } = formData;
       const response = await signUp({ email, password, ...metadata, app: "kenziehub" });
-      toast.success(response.session
+      toast.success(response.access_token
         ? "Conta criada com sucesso! Faça login."
         : "Cadastro recebido! Confirme o email para ativar sua conta.");
       navigate("/");
