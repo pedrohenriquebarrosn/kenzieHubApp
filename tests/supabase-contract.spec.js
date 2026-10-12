@@ -59,7 +59,7 @@ test('authenticated Hub user creates, edits, reloads and deletes server-backed t
 });
 
 test('signup communicates SMTP restriction instead of falsely confirming registration',async({page})=>{
-  await page.route(/\/auth\/v1\/signup$/,route=>route.fulfill({
+  await page.route(/\/auth\/v1\/signup\?redirect_to=/,route=>route.fulfill({
     status:422,headers:cors,body:JSON.stringify({msg:'Email address not authorized'})
   }));
   await page.goto('/register');
