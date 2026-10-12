@@ -22,6 +22,8 @@ export const Register = () => {
     reset,
   } = useForm({
     resolver: yupResolver(RegisterSchema),
+    mode: "onChange",
+    reValidateMode: "onChange",
   });
 
   const submit = async (formData) => {
@@ -42,7 +44,7 @@ export const Register = () => {
           <p>Rapido e grátis, vamos nessa</p>
         </div>
         <Input
-          label={"Name"}
+          label={"Nome"}
           type={"text"}
           placeholder={"Digite aqui seu nome"}
           register={register("name")}
@@ -78,8 +80,8 @@ export const Register = () => {
         />
         <Input
           label={"Contato"}
-          type={"text"}
-          placeholder={"Fale sobre você"}
+          type={"tel"}
+          placeholder={"Ex.: 81999998888"}
           register={register("contact")}
           error={errors.contact}
         />
