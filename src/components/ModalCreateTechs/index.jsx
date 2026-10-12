@@ -20,10 +20,11 @@ export const ModalCreateTechs = () => {
     resolver: yupResolver(ModalCreateSchema),
   });
 
-  const submit = (formData) => {
-    techsCreate(formData);
-    setCreateModal(false);
-    reset();
+  const submit = async (formData) => {
+    if (await techsCreate(formData)) {
+      setCreateModal(false);
+      reset();
+    }
   };
 
   return (
@@ -31,7 +32,7 @@ export const ModalCreateTechs = () => {
       <StyledModalCreateForm onSubmit={handleSubmit(submit)}>
         <div>
           <h2>Cadastrar Tecnologia</h2>
-          <Button action={() => setCreateModal(false)}>X</Button>
+          <Button type="button" action={() => setCreateModal(false)}>X</Button>
         </div>
         <Input
           label={"Nome"}
