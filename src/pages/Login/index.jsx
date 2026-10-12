@@ -11,7 +11,7 @@ import { useContext } from "react";
 import { InputPassword } from "../../components/InputPassword";
 
 export const Login = () => {
-  const { userLogin } = useContext(UserContext);
+  const { userLogin, startDemo } = useContext(UserContext);
 
   const {
     handleSubmit,
@@ -51,6 +51,11 @@ export const Login = () => {
           <div className="goToRegister">
             <Link to="/register">Cadastre-se</Link>
           </div>
+        </div>
+        <div className="demoEntry">
+          <p>Ou explore o projeto sem criar uma conta real:</p>
+          <Button type="button" action={startDemo}>Acessar demonstração</Button>
+          <p>Os dados da demonstração ficam somente neste navegador.</p>
         </div>
       </StyledFormLogin>
     </StyledMain>
