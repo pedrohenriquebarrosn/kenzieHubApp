@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test';
 test('visitor can manage technologies in the explicitly labeled local demo', async ({ page }) => {
   await page.goto('/');
   await page.getByRole('button', { name: 'Acessar demonstração' }).click();
-  await expect(page.getByText(/Modo demonstração local/)).toBeVisible();
+  await expect(page.getByText(/Demonstração local:/)).toBeVisible();
   await expect(page.getByRole('heading', { name: /Olá, Visitante/ })).toBeVisible();
 
   await page.locator('.titleTechs button').click();
@@ -32,5 +32,5 @@ test('visitor can access demo on mobile without a login', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/');
   await page.getByRole('button', { name: 'Acessar demonstração' }).click();
-  await expect(page.getByText(/Modo demonstração local/)).toBeVisible();
+  await expect(page.getByText(/Demonstração local:/)).toBeVisible();
 });
