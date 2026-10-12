@@ -23,7 +23,16 @@ export const Dashboard = () => {
         </nav>
       </StyledDashboardHeader>
       <StyledDashboardMain>
-        {isDemo && <p role="status">Demonstração local: não representa autenticação real nem dados sincronizados.</p>}
+        {isDemo && <p role="status" style={{
+            color: "#b8f5cf",
+            background: "#182820",
+            border: "1px solid #2c7a4b",
+            borderRadius: "6px",
+            padding: "12px 16px",
+            margin: "8px auto 20px",
+            width: "min(100%, 980px)",
+            lineHeight: 1.5,
+          }}>Demonstração local: não representa autenticação real nem dados sincronizados.</p>}
         <section className="sectionBio">
           <div>
             <h2>Olá, {user.name}</h2>
