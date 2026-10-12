@@ -3,7 +3,9 @@
 
 A React application developed during my Full Stack Web Development training at **Kenzie Academy Brasil**, featuring user authentication, protected navigation, and technology management.
 
-**[Hosted UI preview](https://kenziehub-eta-drab.vercel.app/)** — the page was opened in a manual check on 11 October 2026. Registration and sign-in did not work in that check. **This is not a verified functional demo.**
+**[Existing hosted UI](https://kenziehub-eta-drab.vercel.app/)** — registration and sign-in failed in a manual check on 11 October 2026. This URL still serves an older version, **not the tested recovery-branch demonstration**.
+
+**[Recovery PR](https://github.com/pedrohenriquebarrosn/kenzieHubApp/pull/1)** — this separate branch adds an explicitly labeled browser-only guest demonstration. Build and **2/2 Playwright browser tests passed** in Chromium (desktop flow and mobile viewport): [test evidence](https://github.com/pedrohenriquebarrosn/kenzieHubApp/actions/runs/38264677945). Real account creation and server authentication are **not yet restored**.
 
 ## Overview
 
@@ -51,7 +53,11 @@ The API configuration is located in `src/services/api.js` and currently referenc
 
 `https://kenziehub.herokuapp.com`
 
-**Current limitation (11 October 2026):** A manual browser check confirmed the front-end page loads but registration and sign-in fail. The external API endpoint is an unverified possible cause; no backend diagnosis or fix was performed. Authenticated technology-management flows could not be tested.
+**Current limitation (12 October 2026):** This recovery branch fixes session-loading and form error handling, and enables local guest technology creation, editing, removal and persistence through browser storage. The old API availability is unverified; real registration, sign-in and backend data persistence have **not** been restored or independently tested. The Vercel site has not been updated to this branch.
+
+To try the guest demo locally, check out `fix/recover-auth-and-techs-20261012`, run `npm install` then `npm run dev`, and choose **Acessar demonstração**. No real credentials are needed. The demo does not perform real authentication.
+
+See [recovery notes](docs/RECOVERY_2026-10-12.md) for dependencies, scope and remaining tests.
 
 ## Technical Highlights
 
