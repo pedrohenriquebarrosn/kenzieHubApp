@@ -5,14 +5,37 @@ import { useNavigate } from "react-router-dom";
 
 export const UserContext = createContext({});
 
+const DEMO_SESSION = "@KENZIEHUB_DEMO_SESSION";
+const DEMO_TECHS = "@KENZIEHUB_DEMO_TECHS";
+const DEMO_USER = { id: "demo", name: "Visitante", course_module: "Demonstração local" };
+
+
 export const UserProvider = ({ children }) => {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [techs, setTechs] = useState([]);
+  const [isDemo, setIsDemo] = useState(false);
+
+  useEffect(() => {
+    if (isDemo) localStorage.setItem(DEMO_TECHS, JSON.stringify(techs));
+  }, [isDemo, techs]);
+
 
   useEffect(() => {
     let active = true;
+    if (localStorage.getItem(DEMO_SESSION) === "true") {
+      setIsDemo(true);
+      setUser(DEMO_USER);
+      try {
+        const saved = JSON.parse(localStorage.getItem(DEMO_TECHS) || "[]");
+        setTechs(Array.isArray(saved) ? saved : []);
+      } catch {
+        setTechs([]);
+      }
+      setLoading(false);
+      return;
+    }
     const token = localStorage.getItem("@TOKEN");
     if (!token) {
       setLoading(false);
@@ -85,7 +108,25 @@ export const UserProvider = ({ children }) => {
     }
   };
 
+  const startDemo = () => {
+    // Public portfolio demonstration: no account, password or network authentication.
+    localStorage.removeItem("@TOKEN");
+    localStorage.setItem(DEMO_SESSION, "true");
+    let saved = [];
+    try {
+      const parsed = JSON.parse(localStorage.getItem(DEMO_TECHS) || "[]");
+      saved = Array.isArray(parsed) ? parsed : [];
+    } catch { /* invalid demo cache: start empty */ }
+    setIsDemo(true);
+    setUser(DEMO_USER);
+    setTechs(saved);
+    setLoading(false);
+    navigate("/dashboard");
+  };
+
   const userLogout = () => {
+    localStorage.removeItem(DEMO_SESSION);
+    setIsDemo(false);
     setUser(null);
     setTechs([]);
     localStorage.removeItem("@TOKEN");
@@ -94,7 +135,7 @@ export const UserProvider = ({ children }) => {
 
   return (
     <UserContext.Provider value={{
-      user, userRegister, userLogin, userLogout, loading, techs, setTechs
+      user, userRegister, userLogin, userLogout, startDemo, isDemo, loading, techs, setTechs
     }}>
       {children}
     </UserContext.Provider>
