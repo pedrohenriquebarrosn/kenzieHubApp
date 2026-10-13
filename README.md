@@ -1,43 +1,52 @@
-# KenzieHub — React Technology Dashboard
+# KenzieHub — Technology Management Dashboard
 
-Educational React application originally developed during the Kenzie Academy Brasil Full Stack program, now under an isolated recovery branch to restore persistent, authenticated data.
+**React dashboard for managing a developer's technologies, proficiency levels, and profile.**
 
-## Live preview (under validation)
+[**↗ See live preview**](https://kenziehub-qfwq-13de0g0ty-pedrohenriquebarrosns-projects.vercel.app/) · [**↗ Code on GitHub**](https://github.com/pedrohenriquebarrosn/kenzieHubApp/tree/review/i18n-pt-en-20261013)
 
-**[Open KenzieHub preview](https://kenziehub-qfwq-7sil0erwz-pedrohenriquebarrosns-projects.vercel.app/)**. This preview is built from the recovery branch, **not** from `main`. The original production deployment remains unchanged.
+## Overview
 
-- **Guest demo:** click `Acessar demonstração` to create/edit/delete sample technologies stored only in this browser.
-- **Real-account route:** registration/login through Supabase Auth, protected dashboard, and persisted technologies in PostgreSQL, isolated by RLS policies.
-- **Email limitation:** Supabase default SMTP only supports authorized organization-team email addresses. An external-user signup flow needs custom SMTP and configured authentication redirect URLs; delivery is **not verified**.
-- **Scope:** educational application, not a production-grade service. Do not submit passwords already used elsewhere.
+KenzieHub is a responsive, bilingual (English/Portuguese) web application created during Full Stack training and subsequently enhanced for professional portfolio demonstrations. Visitors can explore an interactive guest mode; registered users have an authenticated dashboard connected to Supabase.
 
-## Technology
+## Key features
 
-React 18 · JavaScript · Vite · React Router · React Hook Form · Yup · Styled Components · Supabase Auth · PostgreSQL · Row Level Security.
+- Account registration, email-confirmation flow, sign-in, sign-out, and protected navigation.
+- Create, view, edit, and remove technologies with proficiency levels.
+- Supabase Auth and PostgreSQL integration with user-scoped Row Level Security (RLS).
+- Separate guest experience with browser-local demonstration data.
+- Responsive interface, validated forms, accessible input feedback, and English/Portuguese language selection.
 
-## Code
+## Technology stack
+
+React 18 · JavaScript · Vite · React Router · React Hook Form · Yup · Styled Components · Supabase Auth · PostgreSQL · RLS · Playwright
+
+## Explore and run locally
+
+The live preview above is built from [the updated implementation branch](https://github.com/pedrohenriquebarrosn/kenzieHubApp/tree/review/i18n-pt-en-20261013). This repository's default `main` branch preserves the earlier coursework version.
 
 ```bash
 git clone https://github.com/pedrohenriquebarrosn/kenzieHubApp.git
 cd kenzieHubApp
-git checkout fix/recover-auth-and-techs-20261012
+git switch review/i18n-pt-en-20261013
 npm install
 npm run dev
 ```
 
-Public client configuration in `src/services/supabase.js` supports `VITE_SUPABASE_URL` and `VITE_SUPABASE_PUBLISHABLE_KEY`. Publishable keys are meant for browser use; **never** place service-role keys or database passwords in Vite variables.
+Supabase client configuration supports `VITE_SUPABASE_URL` and `VITE_SUPABASE_PUBLISHABLE_KEY`. Never place private service-role or database credentials in client-side environment variables.
 
-## Data security
+## Engineering and verification
 
-Table `public.kenziehub_technologies` has RLS enabled with policies requiring `auth.uid() = user_id` for CRUD. Guest demonstration never writes to the server. Access to the table is not granted to the anonymous role.
+- Guest-mode technology CRUD and responsive flows were exercised with Playwright.
+- Login and technology CRUD flows have automated tests with simulated Supabase HTTP responses.
+- A real signup, email confirmation, sign-in, and persisted technology were observed with one account.
+- PostgreSQL tables use owner-restricted RLS policies for read/write operations.
 
-## Verification
+This is a portfolio application, not a commercial service. The guest demonstration does not create server accounts or write to the shared database.
 
-- [Recovery pull request](https://github.com/pedrohenriquebarrosn/kenzieHubApp/pull/1) (draft).
-- [Passing browser and API-contract tests](https://github.com/pedrohenriquebarrosn/kenzieHubApp/actions/runs/38288172541) include guest operations and mocked hosted Auth/CRUD interactions through reload.
-- Vercel staging preview reached `READY`.
-- **Not yet verified:** real confirmation email receipt, live signup/login with distinct accounts, authenticated CRUD persistence and isolation in the hosted browser. API-mocked tests are **not** proof of those live checks.
+---
 
-## Portfolio use
+## Author
 
-The hosted URL is a **technical preview**, not a completed production release. Keep the recovery branch separate until an actual user can verify signup, login, refresh, technology CRUD, logout, and cross-account isolation.
+**Pedro Henrique Barros Nascimento** — Business Administration graduate and Full Stack development alumnus of Kenzie Academy Brasil.
+
+[GitHub profile](https://github.com/pedrohenriquebarrosn) · [LinkedIn](https://www.linkedin.com/in/pedro-henrique-barros-nascimento-2bb684251/)
