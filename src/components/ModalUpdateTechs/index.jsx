@@ -16,8 +16,6 @@ export const ModalUpdateTechs = () => {
     techsUpdate,
     updateModal,
     setUpdateModal,
-    editingTechs,
-    setEditingTechs,
   } = useContext(TechsContext);
   const { t } = useLanguage();
 
