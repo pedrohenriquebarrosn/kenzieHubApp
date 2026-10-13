@@ -1,73 +1,52 @@
 # KenzieHub — Technology Management Dashboard
 
-A React application developed during my Full Stack Web Development training at **Kenzie Academy Brasil**, featuring user authentication, protected navigation, and technology management.
+**React dashboard for managing a developer's technologies, proficiency levels, and profile.**
 
-**[▶ See Project Live ↗](https://kenziehub-qfwq-c74oi26dr-pedrohenriquebarrosns-projects.vercel.app/)** — updated preview with registration, sign-in and a separate guest demo.
+[**↗ See live preview**](https://kenziehub-qfwq-13de0g0ty-pedrohenriquebarrosns-projects.vercel.app/) · [**↗ Code on GitHub**](https://github.com/pedrohenriquebarrosn/kenzieHubApp/tree/review/i18n-pt-en-20261013)
 
 ## Overview
 
-KenzieHub is an educational web application designed to help users manage technologies associated with their profiles.
+KenzieHub is a responsive, bilingual (English/Portuguese) web application created during Full Stack training and subsequently enhanced for professional portfolio demonstrations. Visitors can explore an interactive guest mode; registered users have an authenticated dashboard connected to Supabase.
 
-The project demonstrates front-end development concepts, API integration, authentication flows, and component-based architecture.
+## Key features
 
-## Features
+- Account registration, email-confirmation flow, sign-in, sign-out, and protected navigation.
+- Create, view, edit, and remove technologies with proficiency levels.
+- Supabase Auth and PostgreSQL integration with user-scoped Row Level Security (RLS).
+- Separate guest experience with browser-local demonstration data.
+- Responsive interface, validated forms, accessible input feedback, and English/Portuguese language selection.
 
-- User registration and login interfaces.
-- Protected dashboard routes.
-- Technology management through an external API.
-- Form validation and user feedback.
-- Client-side navigation with React Router.
-- Notifications for user interactions.
+## Technology stack
 
-## Technologies
+React 18 · JavaScript · Vite · React Router · React Hook Form · Yup · Styled Components · Supabase Auth · PostgreSQL · RLS · Playwright
 
-- React 18
-- JavaScript
-- Vite
-- React Router
-- Axios
-- React Hook Form
-- Yup
-- Styled Components
-- React Toastify
+## Explore and run locally
 
-## Getting Started
-
-Clone the repository and install the dependencies:
+The live preview above is built from [the updated implementation branch](https://github.com/pedrohenriquebarrosn/kenzieHubApp/tree/review/i18n-pt-en-20261013). This repository's default `main` branch preserves the earlier coursework version.
 
 ```bash
+git clone https://github.com/pedrohenriquebarrosn/kenzieHubApp.git
+cd kenzieHubApp
+git switch review/i18n-pt-en-20261013
 npm install
 npm run dev
 ```
 
-Open the local URL displayed by Vite.
+Supabase client configuration supports `VITE_SUPABASE_URL` and `VITE_SUPABASE_PUBLISHABLE_KEY`. Never place private service-role or database credentials in client-side environment variables.
 
-## API Integration
+## Engineering and verification
 
-The application communicates with an external KenzieHub API using Axios.
+- Guest-mode technology CRUD and responsive flows were exercised with Playwright.
+- Login and technology CRUD flows have automated tests with simulated Supabase HTTP responses.
+- A real signup, email confirmation, sign-in, and persisted technology were observed with one account.
+- PostgreSQL tables use owner-restricted RLS policies for read/write operations.
 
-The API configuration is located in `src/services/api.js` and currently references:
+This is a portfolio application, not a commercial service. The guest demonstration does not create server accounts or write to the shared database.
 
-`https://kenziehub.herokuapp.com`
+---
 
-**Version note:** The live link uses [`review/i18n-pt-en-20261013`](https://github.com/pedrohenriquebarrosn/kenzieHubApp/tree/review/i18n-pt-en-20261013). The default `main` branch documents the original external-API implementation; the updated preview uses Supabase Auth and PostgreSQL. Registration, email confirmation and one technology record were observed with one real account; multi-account isolation and live edit/delete remain unverified.
+## Author
 
-## Technical Highlights
+**Pedro Henrique Barros Nascimento** — Business Administration graduate and Full Stack development alumnus of Kenzie Academy Brasil.
 
-- Reusable React components.
-- Client-side state management.
-- Protected routes for authenticated users.
-- HTTP requests and API integration with Axios.
-- Form handling and validation.
-- Conditional rendering and user notifications.
-
-## Project Scope
-
-This project was developed for educational purposes at Kenzie Academy Brasil.
-
-It demonstrates practical front-end development and authentication-related concepts but has not been independently validated as a production-ready application.
-
-## Connect
-
-- [LinkedIn](https://www.linkedin.com/in/pedro-henrique-barros-nascimento-2bb684251/)
-- [GitHub Profile](https://github.com/pedrohenriquebarrosn)
+[GitHub profile](https://github.com/pedrohenriquebarrosn) · [LinkedIn](https://www.linkedin.com/in/pedro-henrique-barros-nascimento-2bb684251/)
