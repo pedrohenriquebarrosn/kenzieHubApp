@@ -4,6 +4,7 @@ on:
     branches:
       - fix/recover-auth-and-techs-20261012
       - fix/kenziehub-form-ux-20261012
+      - review/deep-code-audit-20261013
   workflow_dispatch:
 
 permissions:
