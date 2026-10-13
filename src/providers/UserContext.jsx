@@ -2,6 +2,7 @@ import { useEffect, useState, createContext } from "react";
 import { signUp, signIn, getSessionUser, signOut, db } from "../services/supabase";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { useLanguage } from "../i18n";
 
 export const UserContext = createContext({});
 const DEMO_SESSION = "@KENZIEHUB_DEMO_SESSION";
@@ -16,6 +17,7 @@ const asProfile = (u) => ({
 });
 export const UserProvider = ({ children }) => {
   const navigate = useNavigate();
+  const { t } = useLanguage();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [techs, setTechs] = useState([]);
@@ -46,7 +48,7 @@ export const UserProvider = ({ children }) => {
         setUser(asProfile(authenticated));
         setTechs(Array.isArray(rows) ? rows : []);
       } catch (e) {
-        if (active) toast.error("Não foi possível recuperar sua sessão. Tente novamente.");
+        if (active) toast.error(t("Não foi possível recuperar sua sessão. Tente novamente."));
       } finally { if (active) setLoading(false); }
     })();
     return () => { active = false; };
@@ -56,13 +58,13 @@ export const UserProvider = ({ children }) => {
     try {
       const { email, password, confirmPassword, ...metadata } = formData;
       const response = await signUp({ email, password, ...metadata, app: "kenziehub" });
-      toast.success(response.access_token
+      toast.success(t(response.access_token
         ? "Conta criada com sucesso! Faça login."
-        : "Cadastro recebido! Confirme o email para ativar sua conta.");
+        : "Cadastro recebido! Confirme o email para ativar sua conta."));
       navigate("/");
       return true;
     } catch(e) {
-      toast.error(e?.message || "Não foi possível criar a conta.");
+      toast.error(t(e?.message || "Não foi possível criar a conta."));
       return false;
     }
   };
@@ -77,10 +79,10 @@ export const UserProvider = ({ children }) => {
       setUser(asProfile(result.user));
       setTechs(Array.isArray(rows) ? rows : []);
       navigate("/dashboard");
-      toast.success("Login feito com sucesso!");
+      toast.success(t("Login feito com sucesso!"));
       return true;
     } catch(e) {
-      toast.error(e?.message || "Não foi possível entrar.");
+      toast.error(t(e?.message || "Não foi possível entrar."));
       return false;
     } finally { setLoading(false); }
   };
