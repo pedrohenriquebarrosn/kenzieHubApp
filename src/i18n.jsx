@@ -37,6 +37,7 @@ const english = {
   "Selecione um nível":"Select a proficiency level",
   "Selecione um nível válido":"Select a valid proficiency level",
   "Editar tecnologia":"Edit technology",
+  "Adicionar nova tecnologia":"Add a new technology",
   "Mostrar senha":"Show password",
   "Ocultar senha":"Hide password",
   "Não foi possível recuperar sua sessão. Tente novamente.":"Could not restore your session. Please try again.",
