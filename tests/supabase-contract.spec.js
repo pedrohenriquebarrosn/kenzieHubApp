@@ -63,7 +63,7 @@ test('signup communicates SMTP restriction instead of falsely confirming registr
     status:422,headers:cors,body:JSON.stringify({msg:'Email address not authorized'})
   }));
   await page.goto('/register');
-  await page.getByLabel('Name').fill('Teste Supabase');
+  await page.getByLabel('Nome').fill('Teste Supabase');
   await page.getByLabel('Email').fill('unapproved@example.invalid');
   await page.getByLabel('Senha',{exact:true}).fill('Valid#123Ab');
   await page.getByLabel('Confirmar Senha').fill('Valid#123Ab');
@@ -71,5 +71,5 @@ test('signup communicates SMTP restriction instead of falsely confirming registr
   await page.getByLabel('Contato').fill('81 912345678');
   await page.getByRole('button',{name:'Cadastrar',exact:true}).click();
   await expect(page.getByText('Email address not authorized')).toBeVisible();
-  await expect(page).toHaveURL(/\/register$/);
+  await expect(page).toHaveURL(/\/register(?:\?lang=(?:pt|en))?$/);
 });
