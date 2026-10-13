@@ -5,6 +5,7 @@ import { BrowserRouter } from "react-router-dom";
 import { GlobalStyle } from "./styles/global";
 import { Providers } from "./providers/providers";
 import { LanguageProvider } from "./i18n";
+import "./i18n.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
