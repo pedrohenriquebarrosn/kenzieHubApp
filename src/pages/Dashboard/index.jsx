@@ -52,16 +52,13 @@ export const Dashboard = () => {
             {techs.length > 0 ? (
               <ul>
                 {techs.map((tech) => (
-                  <Button
-                    className={"openModalButton"}
-                    action={() => setUpdateModal(tech)}
-                    key={tech.id}
-                  >
-                    <li>
-                      <h3>{tech.title}</h3>
-                      <h4>{t(tech.status)}</h4>
-                    </li>
-                  </Button>
+                  <li key={tech.id}>
+                    <Button className="openModalButton" action={() => setUpdateModal(tech)}
+                      aria-label={t("Editar tecnologia") + ": " + tech.title}>
+                      <span>{tech.title}</span>
+                      <span>{t(tech.status)}</span>
+                    </Button>
+                  </li>
                 ))}
               </ul>
             ) : (
