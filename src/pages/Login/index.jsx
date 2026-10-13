@@ -53,7 +53,7 @@ export const Login = () => {
           register={register("password")}
           error={errors.password}
         />
-        <Button>{t("Entrar")}</Button>
+        <Button type="submit">{t("Entrar")}</Button>
         <div className="divRegister">
           <p>{t("Ainda não possui uma conta?")}</p>
           <div className="goToRegister">
