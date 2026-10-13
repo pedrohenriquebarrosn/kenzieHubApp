@@ -44,7 +44,7 @@ export const Dashboard = () => {
         <section className="sectionInfos">
           <div className="titleTechs">
             <h2>{t("Tecnologias")}</h2>
-            <Button action={() => setCreateModal(true)}>
+            <Button action={() => setCreateModal(true)} aria-label={t("Cadastrar Tecnologia")}>
               <img src={plus} alt="+" />
             </Button>
           </div>
