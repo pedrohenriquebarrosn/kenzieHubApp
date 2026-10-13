@@ -11,9 +11,11 @@ import { Select } from "../../components/Select";
 import { StyledMain } from "../Login/style";
 import { UserContext } from "../../providers/UserContext";
 import { InputPassword } from "../../components/InputPassword";
+import { useLanguage } from "../../i18n";
 
 export const Register = () => {
   const { userRegister } = useContext(UserContext);
+  const { t } = useLanguage();
 
   const {
     register,
@@ -35,13 +37,13 @@ export const Register = () => {
       <StyledDivTitle>
         <img src={logo} alt="Kenzie Hub" />
         <div className="backToLogin">
-          <Link to="/">Voltar</Link>
+          <Link to="/">{t("Voltar")}</Link>
         </div>
       </StyledDivTitle>
       <StyledFormRegister onSubmit={handleSubmit(submit)} noValidate>
         <div className="divInfo">
-          <h3>Crie sua conta</h3>
-          <p>Rapido e grátis, vamos nessa</p>
+          <h3>{t("Crie sua conta")}</h3>
+          <p>{t("Rapido e grátis, vamos nessa")}</p>
         </div>
         <Input
           label={"Nome"}
@@ -97,7 +99,7 @@ export const Register = () => {
           <option value="Quinto Módulo">Quinto Módulo</option>
           <option value="Sexto Módulo">Sexto Módulo</option>
         </Select>
-        <Button className={"registerButton"}>Cadastrar</Button>
+        <Button className={"registerButton"}>{t("Cadastrar")}</Button>
       </StyledFormRegister>
     </StyledMain>
   );
