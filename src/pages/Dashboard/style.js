@@ -158,7 +158,22 @@ export const StyledDashboardMain = styled.main`
     .openModalButton {
       width: 100%;
       min-width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 22px;
+      text-align: left;
+      background: transparent;
+      border: none;
+      color: #f8f9fa;
+      font-size: .875rem;
+      font-weight: 600;
     }
+    .openModalButton > span:last-child {
+      font-weight: 400;
+      color: #a3abb2;
+    }
+    .openModalButton:focus-visible { outline: 2px solid #ff577f; outline-offset: -2px; }
 
     @media (max-width: 426px) {
       padding: 20px 10px;
