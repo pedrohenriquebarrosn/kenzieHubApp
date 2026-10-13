@@ -37,7 +37,7 @@ test('authenticated Hub user creates, edits, reloads and deletes server-backed t
   });
   await page.goto('/');
   await page.getByLabel('Email').fill('test.user@example.invalid');
-  await page.getByLabel('Senha').fill('VeryStrong#123');
+  await page.getByLabel('Senha',{exact:true}).fill('VeryStrong#123');
   await page.getByRole('button',{name:'Entrar'}).click();
   await expect(page).toHaveURL(/\/dashboard$/);
   await expect(page.getByRole('heading',{name:'Olá, Pessoa de Teste'})).toBeVisible();
@@ -63,7 +63,7 @@ test('signup communicates SMTP restriction instead of falsely confirming registr
     status:422,headers:cors,body:JSON.stringify({msg:'Email address not authorized'})
   }));
   await page.goto('/register');
-  await page.getByLabel('Name').fill('Teste Supabase');
+  await page.getByLabel('Nome',{exact:true}).fill('Teste Supabase');
   await page.getByLabel('Email').fill('unapproved@example.invalid');
   await page.getByLabel('Senha',{exact:true}).fill('Valid#123Ab');
   await page.getByLabel('Confirmar Senha').fill('Valid#123Ab');
@@ -71,5 +71,5 @@ test('signup communicates SMTP restriction instead of falsely confirming registr
   await page.getByLabel('Contato').fill('81 912345678');
   await page.getByRole('button',{name:'Cadastrar',exact:true}).click();
   await expect(page.getByText('Email address not authorized')).toBeVisible();
-  await expect(page).toHaveURL(/\/register$/);
+  await expect(page).toHaveURL(/\/register(?:\?lang=(?:pt|en))?$/);
 });
