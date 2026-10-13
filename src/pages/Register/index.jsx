@@ -100,7 +100,7 @@ export const Register = () => {
           <option value="Quinto Módulo">Quinto Módulo</option>
           <option value="Sexto Módulo">Sexto Módulo</option>
         </Select>
-        <Button className={"registerButton"}>{t("Cadastrar")}</Button>
+        <Button type="submit" className={"registerButton"}>{t("Cadastrar")}</Button>
       </StyledFormRegister>
     </StyledMain>
   );
