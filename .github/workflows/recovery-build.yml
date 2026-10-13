@@ -5,6 +5,7 @@ on:
       - fix/recover-auth-and-techs-20261012
       - fix/kenziehub-form-ux-20261012
       - review/i18n-pt-en-20261013
+      - main
   workflow_dispatch:
 
 permissions:
