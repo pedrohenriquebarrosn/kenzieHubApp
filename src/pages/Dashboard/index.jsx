@@ -7,9 +7,11 @@ import plus from "../../assets/+.svg";
 import { TechsContext } from "../../providers/TechsContext";
 import { ModalCreateTechs } from "../../components/ModalCreateTechs";
 import { ModalUpdateTechs } from "../../components/ModalUpdateTechs";
+import { useLanguage } from "../../i18n";
 
 export const Dashboard = () => {
   const { user, userLogout, isDemo } = useContext(UserContext);
+  const { t } = useLanguage();
 
   const { techs, createModal, setCreateModal, updateModal, setUpdateModal } =
     useContext(TechsContext);
@@ -19,7 +21,7 @@ export const Dashboard = () => {
       <StyledDashboardHeader>
         <nav>
           <img src={logo} alt="Kenzie Hub" />
-          <Button action={() => userLogout()}>Sair</Button>
+          <Button action={() => userLogout()}>{t("Sair")}</Button>
         </nav>
       </StyledDashboardHeader>
       <StyledDashboardMain>
@@ -32,16 +34,16 @@ export const Dashboard = () => {
             margin: "8px auto 20px",
             width: "min(100%, 980px)",
             lineHeight: 1.5,
-          }}>Demonstração local: não representa autenticação real nem dados sincronizados.</p>}
+          }}>{t("Demonstração local: não representa autenticação real nem dados sincronizados.")}</p>}
         <section className="sectionBio">
           <div>
-            <h2>Olá, {user.name}</h2>
-            <p>{user.course_module}</p>
+            <h2>{t("Olá, ")}{t(user.name)}</h2>
+            <p>{t(user.course_module)}</p>
           </div>
         </section>
         <section className="sectionInfos">
           <div className="titleTechs">
-            <h2>Tecnologias</h2>
+            <h2>{t("Tecnologias")}</h2>
             <Button action={() => setCreateModal(true)}>
               <img src={plus} alt="+" />
             </Button>
@@ -57,13 +59,13 @@ export const Dashboard = () => {
                   >
                     <li>
                       <h3>{tech.title}</h3>
-                      <h4>{tech.status}</h4>
+                      <h4>{t(tech.status)}</h4>
                     </li>
                   </Button>
                 ))}
               </ul>
             ) : (
-              <h1>Você não tem tecnologias cadastradas</h1>
+              <h1>{t("Você não tem tecnologias cadastradas")}</h1>
             )}
           </div>
         </section>
