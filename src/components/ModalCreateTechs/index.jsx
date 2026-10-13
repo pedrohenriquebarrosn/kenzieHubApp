@@ -7,9 +7,11 @@ import { Select } from "../Select";
 import { ModalCreateSchema } from "./ModalCreateSchema";
 import { StyledDashboardDiv, StyledModalCreateForm } from "./style";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useLanguage } from "../../i18n";
 
 export const ModalCreateTechs = () => {
   const { techsCreate, setCreateModal } = useContext(TechsContext);
+  const { t } = useLanguage();
 
   const {
     register,
@@ -31,7 +33,7 @@ export const ModalCreateTechs = () => {
     <StyledDashboardDiv>
       <StyledModalCreateForm onSubmit={handleSubmit(submit)}>
         <div>
-          <h2>Cadastrar Tecnologia</h2>
+          <h2>{t("Cadastrar Tecnologia")}</h2>
           <Button type="button" action={() => setCreateModal(false)}>X</Button>
         </div>
         <Input
@@ -50,7 +52,7 @@ export const ModalCreateTechs = () => {
           <option value="Intermediário">Intermediário</option>
           <option value="Avançado">Avançado</option>
         </Select>
-        <Button>Cadastrar Tecnologia</Button>
+        <Button>{t("Cadastrar Tecnologia")}</Button>
       </StyledModalCreateForm>
     </StyledDashboardDiv>
   );
