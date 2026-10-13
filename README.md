@@ -2,7 +2,7 @@
 
 **React dashboard for managing a developer's technologies, proficiency levels, and profile.**
 
-[**↗ See live preview**](https://kenziehub-qfwq-13de0g0ty-pedrohenriquebarrosns-projects.vercel.app/) · [**↗ Code on GitHub**](https://github.com/pedrohenriquebarrosn/kenzieHubApp)
+[**↗ See live preview**](https://kenziehub-qfwq-git-main-pedrohenriquebarrosns-projects.vercel.app/) · [**↗ Code on GitHub**](https://github.com/pedrohenriquebarrosn/kenzieHubApp)
 
 ## Overview
 
