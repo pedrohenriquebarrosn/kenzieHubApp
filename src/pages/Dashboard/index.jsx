@@ -7,7 +7,7 @@ import plus from "../../assets/+.svg";
 import { TechsContext } from "../../providers/TechsContext";
 import { ModalCreateTechs } from "../../components/ModalCreateTechs";
 import { ModalUpdateTechs } from "../../components/ModalUpdateTechs";
-import { useLanguage } from "../../i18n";
+import { useLanguage, LanguageSwitcher } from "../../i18n";
 
 export const Dashboard = () => {
   const { user, userLogout, isDemo } = useContext(UserContext);
@@ -21,7 +21,7 @@ export const Dashboard = () => {
       <StyledDashboardHeader>
         <nav>
           <img src={logo} alt="Kenzie Hub" />
-          <Button action={() => userLogout()}>{t("Sair")}</Button>
+          <div className="dashboard-header-actions"><LanguageSwitcher /><Button action={() => userLogout()}>{t("Sair")}</Button></div>
         </nav>
       </StyledDashboardHeader>
       <StyledDashboardMain>
