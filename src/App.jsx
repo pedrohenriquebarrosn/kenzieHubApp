@@ -1,10 +1,12 @@
 import { AppRoutes } from "./routes";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { LanguageSwitcher } from "./i18n";
 
 function App() {
   return (
     <div className="App">
+      <LanguageSwitcher />
       <AppRoutes />
       <ToastContainer
         position="top-right"
