@@ -3,3 +3,9 @@
 .global-language-switch button[aria-pressed="true"]{background:#ff577f;color:#111}
 .global-language-switch button:focus-visible{outline:2px solid #ff95b0;outline-offset:2px}
 @media(max-width:600px){.global-language-switch{top:5px;right:5px}.global-language-switch button{min-width:36px;min-height:34px;padding:4px 6px}}
+
+.dashboard-header-actions{display:flex;align-items:center;gap:12px}
+.dashboard-header-actions .global-language-switch{position:static;box-shadow:none;flex-shrink:0}
+.dashboard-header-actions .global-language-switch button{min-height:34px;min-width:36px;padding:4px 8px}
+.dashboard-header-actions .global-language-switch button[aria-pressed="true"]{background:#ff577f;color:#111}
+@media(max-width:570px){.dashboard-header-actions{gap:5px}.dashboard-header-actions .global-language-switch{padding:2px}}
