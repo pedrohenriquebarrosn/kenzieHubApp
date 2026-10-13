@@ -3,7 +3,6 @@ import { Button } from "../Button";
 import { StyledInputPassword } from "./style";
 import { MdVisibility, MdVisibilityOff } from "react-icons/md";
 import { useLanguage } from "../../i18n";
-import { useLanguage } from "../../i18n";
 
 export const InputPassword = ({
   label,
@@ -13,7 +12,6 @@ export const InputPassword = ({
   error,
 }) => {
   const [isHidden, setIsHidden] = useState(true);
-  const { t } = useLanguage();
   const { t } = useLanguage();
   return (
     <StyledInputPassword>
