@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Button } from "../Button";
 import { StyledInputPassword } from "./style";
 import { MdVisibility, MdVisibilityOff } from "react-icons/md";
+import { useLanguage } from "../../i18n";
 
 export const InputPassword = ({
   label,
@@ -11,19 +12,20 @@ export const InputPassword = ({
   error,
 }) => {
   const [isHidden, setIsHidden] = useState(true);
+  const { t } = useLanguage();
   return (
     <StyledInputPassword>
-      {label && <label htmlFor={register.name}>{label}</label>}
+      {label && <label htmlFor={register.name}>{t(label)}</label>}
       <input
         type={isHidden ? "password" : "text"}
         id={register.name}
-        placeholder={placeholder}
+        placeholder={t(placeholder)}
         {...register}
       />
       <Button type={"button"} action={() => setIsHidden(!isHidden)}>
         {isHidden ? <MdVisibilityOff /> : <MdVisibility />}
       </Button>
-      {error && <p>{error.message}</p>}
+      {error && <p>{t(error.message)}</p>}
     </StyledInputPassword>
   );
 };
