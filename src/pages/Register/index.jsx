@@ -11,7 +11,7 @@ import { Select } from "../../components/Select";
 import { StyledMain } from "../Login/style";
 import { UserContext } from "../../providers/UserContext";
 import { InputPassword } from "../../components/InputPassword";
-import { useLanguage } from "../../i18n";
+import { useLanguage, LanguageSwitcher } from "../../i18n";
 
 export const Register = () => {
   const { userRegister } = useContext(UserContext);
@@ -34,6 +34,7 @@ export const Register = () => {
 
   return (
     <StyledMain>
+      <LanguageSwitcher />
       <StyledDivTitle>
         <img src={logo} alt="Kenzie Hub" />
         <div className="backToLogin">
