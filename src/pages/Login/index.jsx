@@ -10,7 +10,7 @@ import { UserContext } from "../../providers/UserContext";
 import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { InputPassword } from "../../components/InputPassword";
-import { useLanguage } from "../../i18n";
+import { useLanguage, LanguageSwitcher } from "../../i18n";
 
 export const Login = () => {
   const { userLogin, startDemo, user, loading } = useContext(UserContext);
@@ -33,6 +33,7 @@ export const Login = () => {
 
   return (
     <StyledMain>
+      <LanguageSwitcher />
       <div className="imgLogo">
         <img src={logo} alt="Kenzie Hub" />
       </div>
