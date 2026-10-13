@@ -20,7 +20,7 @@ jobs:
         with:
           node-version: 20
           cache: npm
-      - run: npm install --no-save --package-lock=false --no-audit --no-fund
+      - run: npm ci --no-audit --no-fund
       - run: npm run build
       - run: npm install --no-save --package-lock=false --no-audit --no-fund @playwright/test@1.56.1
       - run: npx playwright install --with-deps chromium
