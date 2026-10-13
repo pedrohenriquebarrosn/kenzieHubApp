@@ -2,10 +2,12 @@ import { createContext, useContext, useState } from "react";
 import { db } from "../services/supabase";
 import { toast } from "react-toastify";
 import { UserContext } from "./UserContext";
+import { useLanguage } from "../i18n";
 
 export const TechsContext = createContext({});
 export const TechsProvider = ({ children }) => {
   const { techs, setTechs, isDemo, user } = useContext(UserContext);
+  const { t } = useLanguage();
   const [createModal, setCreateModal] = useState(false);
   const [updateModal, setUpdateModal] = useState(null);
   const techsCreate = async (formData) => {
@@ -13,15 +15,15 @@ export const TechsProvider = ({ children }) => {
       setTechs(current => [...current, { ...formData, id: `demo-${Date.now()}` }]);
       return true;
     }
-    if (!user?.id) { toast.error("Faça login novamente."); return false; }
+    if (!user?.id) { toast.error(t("Faça login novamente.")); return false; }
     try {
       const result = await db("kenziehub_technologies", "POST", [{
         user_id: user.id, title: formData.title, status: formData.status
       }]);
       setTechs(current => [...current, result[0]]);
-      toast.success("Tecnologia criada com sucesso!");
+      toast.success(t("Tecnologia criada com sucesso!"));
       return true;
-    } catch(e) { toast.error(e.message || "Não foi possível criar."); return false; }
+    } catch(e) { toast.error(t(e.message || "Não foi possível criar.")); return false; }
   };
   const techsRemove = async (techId) => {
     if (isDemo) {
@@ -32,9 +34,9 @@ export const TechsProvider = ({ children }) => {
       const result = await db(`kenziehub_technologies?id=eq.${encodeURIComponent(techId)}&select=id`, "DELETE");
       if (!result?.length) throw new Error("Tecnologia não encontrada ou sem permissão.");
       setTechs(current => current.filter(t => t.id !== techId));
-      toast.success("Tecnologia removida!");
+      toast.success(t("Tecnologia removida!"));
       return true;
-    } catch(e) { toast.error(e.message || "Não foi possível excluir."); return false; }
+    } catch(e) { toast.error(t(e.message || "Não foi possível excluir.")); return false; }
   };
   const techsUpdate = async (formData, techId) => {
     if (isDemo) {
@@ -47,9 +49,9 @@ export const TechsProvider = ({ children }) => {
       });
       if (!result?.length) throw new Error("Tecnologia não encontrada ou sem permissão.");
       setTechs(current => current.map(t => t.id === techId ? result[0] : t));
-      toast.success("Tecnologia atualizada!");
+      toast.success(t("Tecnologia atualizada!"));
       return true;
-    } catch(e) { toast.error(e.message || "Não foi possível atualizar."); return false; }
+    } catch(e) { toast.error(t(e.message || "Não foi possível atualizar.")); return false; }
   };
   return (
     <TechsContext.Provider value={{
