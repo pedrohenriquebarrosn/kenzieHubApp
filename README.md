@@ -2,7 +2,7 @@
 
 **React dashboard for managing a developer's technologies, proficiency levels, and profile.**
 
-[**↗ See live preview**](https://kenziehub-qfwq-13de0g0ty-pedrohenriquebarrosns-projects.vercel.app/) · [**↗ Code on GitHub**](https://github.com/pedrohenriquebarrosn/kenzieHubApp/tree/review/i18n-pt-en-20261013)
+[**↗ See live preview**](https://kenziehub-qfwq-13de0g0ty-pedrohenriquebarrosns-projects.vercel.app/) · [**↗ Code on GitHub**](https://github.com/pedrohenriquebarrosn/kenzieHubApp)
 
 ## Overview
 
@@ -22,12 +22,11 @@ React 18 · JavaScript · Vite · React Router · React Hook Form · Yup · Styl
 
 ## Explore and run locally
 
-The live preview above is built from [the updated implementation branch](https://github.com/pedrohenriquebarrosn/kenzieHubApp/tree/review/i18n-pt-en-20261013). This repository's default `main` branch preserves the earlier coursework version.
+The default `main` branch includes the reviewed implementation and the reproducible npm lockfile. The live preview is a separate deployment and should be checked against the latest release commit.
 
 ```bash
 git clone https://github.com/pedrohenriquebarrosn/kenzieHubApp.git
 cd kenzieHubApp
-git switch review/i18n-pt-en-20261013
 npm install
 npm run dev
 ```
