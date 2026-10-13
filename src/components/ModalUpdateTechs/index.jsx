@@ -8,6 +8,7 @@ import { Select } from "../Select";
 import { ModalUpdateSchema } from "./ModalUpdateSchema";
 import { StyledModalUpdateForm } from "./style";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useLanguage } from "../../i18n";
 
 export const ModalUpdateTechs = () => {
   const {
@@ -18,6 +19,7 @@ export const ModalUpdateTechs = () => {
     editingTechs,
     setEditingTechs,
   } = useContext(TechsContext);
+  const { t } = useLanguage();
 
   const {
     register,
@@ -43,7 +45,7 @@ export const ModalUpdateTechs = () => {
     <StyledDashboardDiv>
       <StyledModalUpdateForm onSubmit={handleSubmit(submit)}>
         <div className="divClose">
-          <h2>Tecnologia Detalhes</h2>
+          <h2>{t("Tecnologia Detalhes")}</h2>
           <Button action={() => setUpdateModal(null)} className={"closeButton"}>
             X
           </Button>
@@ -66,7 +68,7 @@ export const ModalUpdateTechs = () => {
         </Select>
         <div className="divButtons">
           <Button className={"saveButton"} type={"submit"}>
-            Salvar alterações
+            {t("Salvar alterações")}
           </Button>
           <Button
             className={"excludeButton"}
@@ -75,7 +77,7 @@ export const ModalUpdateTechs = () => {
               if (await techsRemove(updateModal.id)) setUpdateModal(null);
             }}
           >
-            Excluir
+            {t("Excluir")}
           </Button>
         </div>
       </StyledModalUpdateForm>
