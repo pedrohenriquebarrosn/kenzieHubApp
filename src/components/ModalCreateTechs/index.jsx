@@ -52,7 +52,7 @@ export const ModalCreateTechs = () => {
           <option value="Intermediário">Intermediário</option>
           <option value="Avançado">Avançado</option>
         </Select>
-        <Button>{t("Cadastrar Tecnologia")}</Button>
+        <Button type="submit">{t("Cadastrar Tecnologia")}</Button>
       </StyledModalCreateForm>
     </StyledDashboardDiv>
   );
