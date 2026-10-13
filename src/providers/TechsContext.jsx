@@ -1,83 +1,62 @@
-import { createContext, useContext, useEffect, useState } from "react";
-import { Api } from "../services/api";
+import { createContext, useContext, useState } from "react";
+import { db } from "../services/supabase";
 import { toast } from "react-toastify";
 import { UserContext } from "./UserContext";
+import { useLanguage } from "../i18n";
 
 export const TechsContext = createContext({});
-
 export const TechsProvider = ({ children }) => {
-  const { techs, setTechs } = useContext(UserContext);
-
+  const { techs, setTechs, isDemo, user } = useContext(UserContext);
+  const { t } = useLanguage();
   const [createModal, setCreateModal] = useState(false);
   const [updateModal, setUpdateModal] = useState(null);
-
   const techsCreate = async (formData) => {
-    try {
-      const token = localStorage.getItem("@TOKEN");
-      const response = await Api.post("/users/techs", formData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      setTechs([...techs, response.data]);
-      toast.success("Tecnologia criada com sucesso!");
-    } catch (error) {
-      console.log(error);
+    if (isDemo) {
+      setTechs(current => [...current, { ...formData, id: `demo-${Date.now()}` }]);
+      return true;
     }
+    if (!user?.id) { toast.error(t("Faça login novamente.")); return false; }
+    try {
+      const result = await db("kenziehub_technologies", "POST", [{
+        user_id: user.id, title: formData.title, status: formData.status
+      }]);
+      setTechs(current => [...current, result[0]]);
+      toast.success(t("Tecnologia criada com sucesso!"));
+      return true;
+    } catch(e) { toast.error(t(e.message || "Não foi possível criar.")); return false; }
   };
-
   const techsRemove = async (techId) => {
-    try {
-      const token = localStorage.getItem("@TOKEN");
-      const response = await Api.delete(`/users/techs/${techId}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const newTechs = techs.filter((tech) => tech.id !== techId);
-      setTechs(newTechs);
-      toast.success("Tecnologia deletada com sucesso!");
-    } catch (error) {
-      console.log(error);
+    if (isDemo) {
+      setTechs(current => current.filter(t => t.id !== techId));
+      return true;
     }
+    try {
+      const result = await db(`kenziehub_technologies?id=eq.${encodeURIComponent(techId)}&select=id`, "DELETE");
+      if (!result?.length) throw new Error("Tecnologia não encontrada ou sem permissão.");
+      setTechs(current => current.filter(t => t.id !== techId));
+      toast.success(t("Tecnologia removida!"));
+      return true;
+    } catch(e) { toast.error(t(e.message || "Não foi possível excluir.")); return false; }
   };
-
   const techsUpdate = async (formData, techId) => {
-    try {
-      const token = localStorage.getItem("@TOKEN");
-      const response = await Api.put(`/users/techs/${techId}`, formData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const newTechs = techs.map((tech) => {
-        if (techId === tech.id) {
-          return { ...tech, ...formData };
-        } else {
-          return tech;
-        }
-      });
-      setTechs(newTechs);
-      toast.success("Tecnologia atualizada com sucesso!");
-    } catch (error) {
-      console.log(error);
+    if (isDemo) {
+      setTechs(current => current.map(t => t.id === techId ? {...t, ...formData} : t));
+      return true;
     }
+    try {
+      const result = await db(`kenziehub_technologies?id=eq.${encodeURIComponent(techId)}&select=id,title,status`, "PATCH", {
+        title: formData.title, status: formData.status
+      });
+      if (!result?.length) throw new Error("Tecnologia não encontrada ou sem permissão.");
+      setTechs(current => current.map(t => t.id === techId ? result[0] : t));
+      toast.success(t("Tecnologia atualizada!"));
+      return true;
+    } catch(e) { toast.error(t(e.message || "Não foi possível atualizar.")); return false; }
   };
-
   return (
-    <TechsContext.Provider
-      value={{
-        techs,
-        techsCreate,
-        techsRemove,
-        createModal,
-        setCreateModal,
-        updateModal,
-        setUpdateModal,
-        techsUpdate,
-      }}
-    >
-      {children}
-    </TechsContext.Provider>
+    <TechsContext.Provider value={{
+      techs, techsCreate, techsRemove, techsUpdate, createModal, setCreateModal,
+      updateModal, setUpdateModal
+    }}>{children}</TechsContext.Provider>
   );
 };

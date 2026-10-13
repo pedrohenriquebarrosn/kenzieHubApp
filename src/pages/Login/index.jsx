@@ -7,11 +7,18 @@ import { Input } from "../../components/Input";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { LoginSchema } from "./loginSchema";
 import { UserContext } from "../../providers/UserContext";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { InputPassword } from "../../components/InputPassword";
+import { useLanguage, LanguageSwitcher } from "../../i18n";
 
 export const Login = () => {
-  const { userLogin } = useContext(UserContext);
+  const { userLogin, startDemo, user, loading } = useContext(UserContext);
+  const { t } = useLanguage();
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!loading && user) navigate("/dashboard", { replace: true });
+  }, [loading, user, navigate]);
 
   const {
     handleSubmit,
@@ -20,18 +27,18 @@ export const Login = () => {
     reset,
   } = useForm({ resolver: yupResolver(LoginSchema) });
 
-  const submit = (formData) => {
-    userLogin(formData);
-    reset();
+  const submit = async (formData) => {
+    if (await userLogin(formData)) reset();
   };
 
   return (
     <StyledMain>
+      <LanguageSwitcher />
       <div className="imgLogo">
         <img src={logo} alt="Kenzie Hub" />
       </div>
       <StyledFormLogin onSubmit={handleSubmit(submit)}>
-        <h3>Login</h3>
+        <h3>{t("Login")}</h3>
         <Input
           label={"Email"}
           type={"email"}
@@ -46,12 +53,17 @@ export const Login = () => {
           register={register("password")}
           error={errors.password}
         />
-        <Button>Entrar</Button>
+        <Button>{t("Entrar")}</Button>
         <div className="divRegister">
-          <p>Ainda não possui uma conta?</p>
+          <p>{t("Ainda não possui uma conta?")}</p>
           <div className="goToRegister">
-            <Link to="/register">Cadastre-se</Link>
+            <Link to="/register">{t("Cadastre-se")}</Link>
           </div>
+        </div>
+        <div className="demoEntry">
+          <p>{t("Ou explore o projeto sem criar uma conta real:")}</p>
+          <Button type="button" action={startDemo}>{t("Acessar demonstração")}</Button>
+          <p>{t("Os dados da demonstração ficam somente neste navegador.")}</p>
         </div>
       </StyledFormLogin>
     </StyledMain>
