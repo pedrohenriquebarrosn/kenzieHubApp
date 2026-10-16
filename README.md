@@ -4,6 +4,10 @@
 
 [**↗ See live preview**](https://kenziehub-qfwq-git-main-pedrohenriquebarrosns-projects.vercel.app/) · [**↗ Code on GitHub**](https://github.com/pedrohenriquebarrosn/kenzieHubApp)
 
+**Project status:** Updated bilingual dashboard on the default branch, with passing build/browser checks and a documented real-account persistence test. [Verification](https://github.com/pedrohenriquebarrosn/kenzieHubApp/actions/runs/38479524202).
+
+**More work:** [Professional Portfolio 2026](https://portfolio-pedro-barros-2026-review.vercel.app/en) · [Versão em português](https://portfolio-pedro-barros-2026-review.vercel.app/pt)
+
 ## Overview
 
 KenzieHub is a responsive, bilingual (English/Portuguese) web application created during Full Stack training and subsequently enhanced for professional portfolio demonstrations. Visitors can explore an interactive guest mode; registered users have an authenticated dashboard connected to Supabase.
@@ -22,7 +26,7 @@ React 18 · JavaScript · Vite · React Router · React Hook Form · Yup · Styl
 
 ## Explore and run locally
 
-The default `main` branch includes the reviewed implementation and the reproducible npm lockfile. The live preview is a separate deployment and should be checked against the latest release commit.
+The default `main` branch includes the reviewed implementation and the reproducible npm lockfile. The linked application provides a published interactive preview; the reviewed source and installation steps are documented here.
 
 ```bash
 git clone https://github.com/pedrohenriquebarrosn/kenzieHubApp.git
