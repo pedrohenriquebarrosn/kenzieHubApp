@@ -1,32 +1,39 @@
 # KenzieHub — Technology Management Dashboard
 
-**React dashboard for managing a developer's technologies, proficiency levels, and profile.**
+**A bilingual React application for organizing developer profiles, technologies, and proficiency levels.**
 
-[**↗ See live preview**](https://kenziehub-qfwq-git-main-pedrohenriquebarrosns-projects.vercel.app/) · [**↗ Code on GitHub**](https://github.com/pedrohenriquebarrosn/kenzieHubApp)
-
-**Project status:** Updated bilingual dashboard on the default branch, with passing build/browser checks and a documented real-account persistence test. [Verification](https://github.com/pedrohenriquebarrosn/kenzieHubApp/actions/runs/38479524202).
-
-**More work:** [Professional Portfolio 2026](https://portfolio-pedro-barros-2026-review.vercel.app/en) · [Versão em português](https://portfolio-pedro-barros-2026-review.vercel.app/pt)
+[**Launch the live app ↗**](https://kenziehub-qfwq-git-main-pedrohenriquebarrosns-projects.vercel.app/) · [**Professional portfolio ↗**](https://portfolio-pedro-barros-2026-review.vercel.app/en) · [**Test evidence ↗**](https://github.com/pedrohenriquebarrosn/kenzieHubApp/actions/runs/38479524202)
 
 ## Overview
 
-KenzieHub is a responsive, bilingual (English/Portuguese) web application created during Full Stack training and subsequently enhanced for professional portfolio demonstrations. Visitors can explore an interactive guest mode; registered users have an authenticated dashboard connected to Supabase.
+KenzieHub brings developer profile and technology management into a responsive dashboard. Users can register, sign in, and organize their technology stack; visitors can explore the interface immediately through an interactive guest experience.
 
-## Key features
+Originally developed during Full Stack training and subsequently expanded, the application now includes an English/Portuguese interface, Supabase-backed authentication and data, and browser-tested core interactions.
 
-- Account registration, email-confirmation flow, sign-in, sign-out, and protected navigation.
-- Create, view, edit, and remove technologies with proficiency levels.
-- Supabase Auth and PostgreSQL integration with user-scoped Row Level Security (RLS).
-- Separate guest experience with browser-local demonstration data.
-- Responsive interface, validated forms, accessible input feedback, and English/Portuguese language selection.
+## Features
 
-## Technology stack
+- **Technology dashboard:** add, browse, edit, and delete technologies, including proficiency levels.
+- **User accounts:** registration, email confirmation, sign-in, sign-out, and protected routes.
+- **Persistent user data:** Supabase Auth and PostgreSQL with row-level security (RLS) scoped to each account.
+- **Instant guest experience:** explore technology-management workflows without creating an account.
+- **Responsive and bilingual UI:** English/Portuguese switching, form validation, and accessible feedback.
 
-React 18 · JavaScript · Vite · React Router · React Hook Form · Yup · Styled Components · Supabase Auth · PostgreSQL · RLS · Playwright
+## Stack
 
-## Explore and run locally
+| Area | Technologies |
+| --- | --- |
+| Frontend | React 18, JavaScript, Vite, React Router |
+| Interface & forms | Styled Components, React Hook Form, Yup |
+| Authentication & data | Supabase Auth, PostgreSQL, Row Level Security |
+| Verification | Playwright, automated build/browser checks |
 
-The default `main` branch includes the reviewed implementation and the reproducible npm lockfile. The linked application provides a published interactive preview; the reviewed source and installation steps are documented here.
+## Explore the project
+
+**[Open KenzieHub ↗](https://kenziehub-qfwq-git-main-pedrohenriquebarrosns-projects.vercel.app/)**
+
+Select the guest experience to try the dashboard immediately. For account-based use, registration and authentication connect to Supabase. Guest data stays in the browser and is separate from account records.
+
+### Run locally
 
 ```bash
 git clone https://github.com/pedrohenriquebarrosn/kenzieHubApp.git
@@ -35,21 +42,19 @@ npm install
 npm run dev
 ```
 
-Supabase client configuration supports `VITE_SUPABASE_URL` and `VITE_SUPABASE_PUBLISHABLE_KEY`. Never place private service-role or database credentials in client-side environment variables.
+For account features, configure `VITE_SUPABASE_URL` and `VITE_SUPABASE_PUBLISHABLE_KEY` for your Supabase project. Keep privileged server credentials out of client-side configuration.
 
-## Engineering and verification
+## Engineering & verification
 
-- Guest-mode technology CRUD and responsive flows were exercised with Playwright.
-- Login and technology CRUD flows have automated tests with simulated Supabase HTTP responses.
-- A real signup, email confirmation, sign-in, and persisted technology were observed with one account.
-- PostgreSQL tables use owner-restricted RLS policies for read/write operations.
+- Guest technology-management workflows and responsive layouts were exercised with Playwright.
+- Automated tests cover login and technology operations using simulated Supabase responses.
+- A separate real-account check documented signup, email confirmation, login, and persisted technology data.
+- Database RLS policies restrict access to each account's records.
 
-This is a portfolio application, not a commercial service. The guest demonstration does not create server accounts or write to the shared database.
+[**View the recorded checks on GitHub Actions ↗**](https://github.com/pedrohenriquebarrosn/kenzieHubApp/actions/runs/38479524202)
 
----
+## About the developer
 
-## Author
+**Pedro Henrique Barros Nascimento** — Full Stack Web Development training at Kenzie Academy Brasil; Business Administration coursework completed at UNIFG. Interested in applied AI, software development, and practical business solutions.
 
-**Pedro Henrique Barros Nascimento** — Business Administration graduate and Full Stack development alumnus of Kenzie Academy Brasil.
-
-[GitHub profile](https://github.com/pedrohenriquebarrosn) · [LinkedIn](https://www.linkedin.com/in/pedro-henrique-barros-nascimento-2bb684251/)
+[GitHub](https://github.com/pedrohenriquebarrosn) · [LinkedIn](https://www.linkedin.com/in/pedro-henrique-barros-nascimento-2bb684251/) · [Portfolio EN](https://portfolio-pedro-barros-2026-review.vercel.app/en) · [Portfólio PT](https://portfolio-pedro-barros-2026-review.vercel.app/pt)
